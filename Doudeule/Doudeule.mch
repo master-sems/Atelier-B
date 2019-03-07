@@ -23,9 +23,11 @@ ABSTRACT_VARIABLES
 INVARIANT
     participants <: USER &
     inconnu /: participants &
+    organisateur : USER &
     organisateur : participants \/ { inconnu } &
     dates_prop : POW(DATE) &
     choix_part : USER <-> DATE &
+    /* choix_part: DATE -> POW(USER) */
     dom(choix_part) <: participants &
     ran(choix_part) <: dates_prop
     
@@ -58,6 +60,7 @@ OPERATIONS
         organisateur /= inconnu
     THEN
         choix_part := choix_part \/ { part |-> date }
+        /* choix_part := choix_part <+ { date |-> choix_part(date) \/ { part } } */
     END  
 
 END
