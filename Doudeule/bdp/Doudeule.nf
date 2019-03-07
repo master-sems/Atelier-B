@@ -37,9 +37,9 @@ THEORY ListVariablesX IS
   External_Context_List_Variables(Machine(Doudeule))==(?);
   Context_List_Variables(Machine(Doudeule))==(?);
   Abstract_List_Variables(Machine(Doudeule))==(?);
-  Local_List_Variables(Machine(Doudeule))==(dates_prop,participants,organisateur);
-  List_Variables(Machine(Doudeule))==(dates_prop,participants,organisateur);
-  External_List_Variables(Machine(Doudeule))==(dates_prop,participants,organisateur)
+  Local_List_Variables(Machine(Doudeule))==(choix_part,dates_prop,participants,organisateur);
+  List_Variables(Machine(Doudeule))==(choix_part,dates_prop,participants,organisateur);
+  External_List_Variables(Machine(Doudeule))==(choix_part,dates_prop,participants,organisateur)
 END
 &
 THEORY ListVisibleVariablesX IS
@@ -57,7 +57,7 @@ THEORY ListInvariantX IS
   Expanded_List_Invariant(Machine(Doudeule))==(btrue);
   Abstract_List_Invariant(Machine(Doudeule))==(btrue);
   Context_List_Invariant(Machine(Doudeule))==(btrue);
-  List_Invariant(Machine(Doudeule))==(organisateur: USER & participants <: USER & dates_prop: POW(DATE))
+  List_Invariant(Machine(Doudeule))==(participants <: USER & inconnu/:participants & organisateur: participants\/{inconnu} & dates_prop: POW(DATE) & choix_part: USER <-> DATE & dom(choix_part) <: participants & ran(choix_part) <: dates_prop)
 END
 &
 THEORY ListAssertionsX IS
@@ -76,9 +76,9 @@ THEORY ListExclusivityX IS
 END
 &
 THEORY ListInitialisationX IS
-  Expanded_List_Initialisation(Machine(Doudeule))==(organisateur,participants,dates_prop:=inconnu,{},{});
+  Expanded_List_Initialisation(Machine(Doudeule))==(organisateur,participants,dates_prop,choix_part:=inconnu,{},{},{});
   Context_List_Initialisation(Machine(Doudeule))==(skip);
-  List_Initialisation(Machine(Doudeule))==(organisateur:=inconnu || participants:={} || dates_prop:={})
+  List_Initialisation(Machine(Doudeule))==(organisateur:=inconnu || participants:={} || dates_prop:={} || choix_part:={})
 END
 &
 THEORY ListParametersX IS
@@ -93,31 +93,37 @@ THEORY ListConstraintsX IS
 END
 &
 THEORY ListOperationsX IS
-  Internal_List_Operations(Machine(Doudeule))==(creer_reunion);
-  List_Operations(Machine(Doudeule))==(creer_reunion)
+  Internal_List_Operations(Machine(Doudeule))==(creer_reunion,indiquer_dispo);
+  List_Operations(Machine(Doudeule))==(creer_reunion,indiquer_dispo)
 END
 &
 THEORY ListInputX IS
-  List_Input(Machine(Doudeule),creer_reunion)==(ed,parts,orga)
+  List_Input(Machine(Doudeule),creer_reunion)==(ed,parts,orga);
+  List_Input(Machine(Doudeule),indiquer_dispo)==(part,date)
 END
 &
 THEORY ListOutputX IS
-  List_Output(Machine(Doudeule),creer_reunion)==(?)
+  List_Output(Machine(Doudeule),creer_reunion)==(?);
+  List_Output(Machine(Doudeule),indiquer_dispo)==(?)
 END
 &
 THEORY ListHeaderX IS
-  List_Header(Machine(Doudeule),creer_reunion)==(creer_reunion(ed,parts,orga))
+  List_Header(Machine(Doudeule),creer_reunion)==(creer_reunion(ed,parts,orga));
+  List_Header(Machine(Doudeule),indiquer_dispo)==(indiquer_dispo(part,date))
 END
 &
 THEORY ListOperationGuardX END
 &
 THEORY ListPreconditionX IS
-  List_Precondition(Machine(Doudeule),creer_reunion)==(ed: POW(DATE) & parts <: USER & parts/={} & orga: USER & orga/=inconnu & organisateur = inconnu)
+  List_Precondition(Machine(Doudeule),creer_reunion)==(ed: POW(DATE) & parts <: USER & parts/={} & inconnu/:parts & orga: USER & orga/=inconnu & organisateur = inconnu);
+  List_Precondition(Machine(Doudeule),indiquer_dispo)==(part: USER & date: DATE & part: participants & date: dates_prop & organisateur/=inconnu)
 END
 &
 THEORY ListSubstitutionX IS
-  Expanded_List_Substitution(Machine(Doudeule),creer_reunion)==(ed: POW(DATE) & parts <: USER & parts/={} & orga: USER & orga/=inconnu & organisateur = inconnu | organisateur,participants,dates_prop:=orga,parts,ed);
-  List_Substitution(Machine(Doudeule),creer_reunion)==(organisateur:=orga || participants:=parts || dates_prop:=ed)
+  Expanded_List_Substitution(Machine(Doudeule),indiquer_dispo)==(part: USER & date: DATE & part: participants & date: dates_prop & organisateur/=inconnu | choix_part:=choix_part\/{part|->date});
+  Expanded_List_Substitution(Machine(Doudeule),creer_reunion)==(ed: POW(DATE) & parts <: USER & parts/={} & inconnu/:parts & orga: USER & orga/=inconnu & organisateur = inconnu | organisateur,participants,dates_prop:=orga,parts,ed);
+  List_Substitution(Machine(Doudeule),creer_reunion)==(organisateur:=orga || participants:=parts || dates_prop:=ed);
+  List_Substitution(Machine(Doudeule),indiquer_dispo)==(choix_part:=choix_part\/{part|->date})
 END
 &
 THEORY ListConstantsX IS
@@ -158,11 +164,12 @@ END
 THEORY ListSeenInfoX END
 &
 THEORY ListANYVarX IS
-  List_ANY_Var(Machine(Doudeule),creer_reunion)==(?)
+  List_ANY_Var(Machine(Doudeule),creer_reunion)==(?);
+  List_ANY_Var(Machine(Doudeule),indiquer_dispo)==(?)
 END
 &
 THEORY ListOfIdsX IS
-  List_Of_Ids(Machine(Doudeule)) == (inconnu,DATE,USER | ? | dates_prop,participants,organisateur | ? | creer_reunion | ? | ? | ? | Doudeule);
+  List_Of_Ids(Machine(Doudeule)) == (inconnu,DATE,USER | ? | choix_part,dates_prop,participants,organisateur | ? | creer_reunion,indiquer_dispo | ? | ? | ? | Doudeule);
   List_Of_HiddenCst_Ids(Machine(Doudeule)) == (? | ?);
   List_Of_VisibleCst_Ids(Machine(Doudeule)) == (inconnu);
   List_Of_VisibleVar_Ids(Machine(Doudeule)) == (? | ?);
@@ -178,11 +185,11 @@ THEORY ConstantsEnvX IS
 END
 &
 THEORY VariablesEnvX IS
-  Variables(Machine(Doudeule)) == (Type(dates_prop) == Mvl(SetOf(atype(DATE,?,?)));Type(participants) == Mvl(SetOf(atype(USER,?,?)));Type(organisateur) == Mvl(atype(USER,?,?)))
+  Variables(Machine(Doudeule)) == (Type(choix_part) == Mvl(SetOf(atype(USER,?,?)*atype(DATE,?,?)));Type(dates_prop) == Mvl(SetOf(atype(DATE,?,?)));Type(participants) == Mvl(SetOf(atype(USER,?,?)));Type(organisateur) == Mvl(atype(USER,?,?)))
 END
 &
 THEORY OperationsEnvX IS
-  Operations(Machine(Doudeule)) == (Type(creer_reunion) == Cst(No_type,SetOf(atype(DATE,?,?))*SetOf(atype(USER,?,?))*atype(USER,?,?)))
+  Operations(Machine(Doudeule)) == (Type(indiquer_dispo) == Cst(No_type,atype(USER,?,?)*atype(DATE,?,?));Type(creer_reunion) == Cst(No_type,SetOf(atype(DATE,?,?))*SetOf(atype(USER,?,?))*atype(USER,?,?)))
 END
 &
 THEORY TCIntRdX IS

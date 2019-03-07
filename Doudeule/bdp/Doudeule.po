@@ -1,4 +1,15 @@
 THEORY ProofList IS
+_f(1) & _f(2) & _f(18) & _f(23) & indiquer_dispo.3,(_f(3) & _f(16) => _f(26));
+_f(1) & _f(2) & _f(18) & _f(23) & indiquer_dispo.2,(_f(3) & _f(14) => _f(25));
+_f(1) & _f(2) & _f(18) & _f(23) & indiquer_dispo.1,(_f(3) & _f(12) => _f(24));
+_f(1) & _f(2) & _f(18) & _f(19) & creer_reunion.3,(_f(3) & _f(16) => _f(22));
+_f(1) & _f(2) & _f(18) & _f(19) & creer_reunion.2,(_f(3) & _f(14) => _f(21));
+_f(1) & _f(2) & _f(18) & _f(19) & creer_reunion.1,(_f(3) & _f(8) => _f(20));
+_f(1) & _f(2) & Initialisation.7,(_f(3) & _f(16) => _f(17));
+_f(1) & _f(2) & Initialisation.6,(_f(3) & _f(14) => _f(15));
+_f(1) & _f(2) & Initialisation.5,(_f(3) & _f(12) => _f(13));
+_f(1) & _f(2) & Initialisation.4,(_f(3) & _f(10) => _f(11));
+_f(1) & _f(2) & Initialisation.3,(_f(3) & _f(8) => _f(9));
 _f(1) & _f(2) & Initialisation.2,(_f(3) & _f(6) => _f(7));
 _f(1) & _f(2) & Initialisation.1,(_f(3) & _f(4) => _f(5))
 END
@@ -9,18 +20,44 @@ DATE: FIN(INTEGER) & not(DATE = {}) & USER: FIN(INTEGER) & not(USER = {}) & ((in
 "Invariant is preserved";
 "Check invariant participants : POW( USER)";
 {} : POW( USER);
+"Check invariant not(inconnu : participants)";
+not(inconnu : {});
+"Check invariant ((organisateur) : (((participants) \/ ({inconnu}))))";
+((inconnu) : ((({}) \/ ({inconnu}))));
 "Check invariant ((dates_prop) : (POW(DATE)))";
 (({}) : (POW(DATE)));
-((organisateur) : (USER)) & participants : POW( USER) & ((dates_prop) : (POW(DATE)));
-((ed) : (POW(DATE))) & parts : POW( USER) & not(parts = {}) & ((orga) : (USER)) & not(orga = inconnu) & ((organisateur) = (inconnu));
+"Check invariant ((choix_part) : (((USER) <-> (DATE))))";
+(({}) : (((USER) <-> (DATE))));
+"Check invariant dom(choix_part) : POW( participants)";
+dom({}) : POW( {});
+"Check invariant ran(choix_part) : POW( dates_prop)";
+ran({}) : POW( {});
+participants : POW( USER) & not(inconnu : participants) & ((organisateur) : (((participants) \/ ({inconnu})))) & ((dates_prop) : (POW(DATE))) & ((choix_part) : (((USER) <-> (DATE)))) & dom(choix_part) : POW( participants) & ran(choix_part) : POW( dates_prop);
+((ed) : (POW(DATE))) & parts : POW( USER) & not(parts = {}) & not(inconnu : parts) & ((orga) : (USER)) & not(orga = inconnu) & ((organisateur) = (inconnu));
+((orga) : (((parts) \/ ({inconnu}))));
+dom(choix_part) : POW( parts);
+ran(choix_part) : POW( ed);
+((part) : (USER)) & ((date) : (DATE)) & ((part) : (participants)) & ((date) : (dates_prop)) & not(organisateur = inconnu);
+((((choix_part) \/ ({((part) |-> (date))}))) : (((USER) <-> (DATE))));
+dom(((choix_part) \/ ({((part) |-> (date))}))) : POW( participants);
+ran(((choix_part) \/ ({((part) |-> (date))}))) : POW( dates_prop);
 DATE: FIN(INTEGER) & not(DATE = {});
+dom(choix_part) : POW( participants);
+((choix_part) : (((USER) <-> (DATE))));
+((dates_prop) : (POW(DATE)));
+((organisateur) : (((participants) \/ ({inconnu}))));
+not(inconnu : participants);
 participants : POW( USER);
-((organisateur) : (USER));
 not(orga = inconnu);
 ((orga) : (USER));
+not(inconnu : parts);
 not(parts = {});
 parts : POW( USER);
-((ed) : (POW(DATE)))
+((ed) : (POW(DATE)));
+((date) : (dates_prop));
+((part) : (participants));
+((date) : (DATE));
+((part) : (USER))
 END
 &
 THEORY EnumerateX

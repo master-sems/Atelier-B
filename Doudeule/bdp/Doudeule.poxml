@@ -21,19 +21,47 @@
 <Define name="seext"/>
 <Define name="inv">
 <Nary_Pred op="&amp;">
-<Exp_Comparison op=":" initialTag="((organisateur) : (USER))">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:1" typref="664455449" value="organisateur"/>
+<Exp_Comparison op="&lt;:" initialTag="participants : POW( USER)">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:1" typref="178381824" value="participants"/>
 <Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:2" typref="178381824" value="USER"/>
 </Exp_Comparison>
-<Exp_Comparison op="&lt;:" initialTag="participants : POW( USER)">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:1" typref="178381824" value="participants"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:2" typref="178381824" value="USER"/>
+<Exp_Comparison op="/:" initialTag="not(inconnu : participants)">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:1" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Exp_Comparison op=":" initialTag="((organisateur) : (((participants) \/ ({inconnu}))))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:1" typref="664455449" value="organisateur"/>
+<Binary_Exp op="\/" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:1" typref="178381824" value="participants"/>
+<Nary_Exp op="{" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:2:1" typref="664455449" value="inconnu"/>
+</Nary_Exp>
+</Binary_Exp>
 </Exp_Comparison>
 <Exp_Comparison op=":" initialTag="((dates_prop) : (POW(DATE)))">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:1" typref="1901520867" value="dates_prop"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:4:1" typref="1901520867" value="dates_prop"/>
 <Unary_Exp op="POW" typref="1815758902">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:1" typref="1901520867" value="DATE"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:4:2:1" typref="1901520867" value="DATE"/>
 </Unary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=":" initialTag="((choix_part) : (((USER) &lt;-&gt; (DATE))))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:1" typref="3624437299" value="choix_part"/>
+<Binary_Exp op="&lt;-&gt;" typref="2016678416">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:2:1" typref="178381824" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:2:2" typref="1901520867" value="DATE"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:" initialTag="dom(choix_part) : POW( participants)">
+<Unary_Exp op="dom" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:6:1:1" typref="3624437299" value="choix_part"/>
+</Unary_Exp>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:6:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:" initialTag="ran(choix_part) : POW( dates_prop)">
+<Unary_Exp op="ran" typref="1901520867">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:7:1:1" typref="3624437299" value="choix_part"/>
+</Unary_Exp>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:7:2" typref="1901520867" value="dates_prop"/>
 </Exp_Comparison>
 </Nary_Pred>
 </Define>
@@ -92,6 +120,14 @@
 <EmptySet tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:6:1:3:2:1" typref="3817003670"/>
 </Values>
 </Simple_Assignement_Sub>
+<Simple_Assignement_Sub>
+<Variables>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:6:1:4:1:1" typref="3624437299" value="choix_part"/>
+</Variables>
+<Values>
+<EmptySet tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:6:1:4:2:1" typref="3817003670"/>
+</Values>
+</Simple_Assignement_Sub>
 </Nary_Sub>
 </Nary_Sub>
 <Binary_Pred op="=&gt;">
@@ -99,19 +135,47 @@
 <Tag goalTag="Invariant is preserved">
 <Nary_Pred op="&amp;">
 <Nary_Pred op="&amp;">
-<Exp_Comparison op=":" initialTag="((organisateur) : (USER))">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:1" typref="664455449" value="organisateur"/>
+<Exp_Comparison op="&lt;:" initialTag="participants : POW( USER)">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:1" typref="178381824" value="participants"/>
 <Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:2" typref="178381824" value="USER"/>
 </Exp_Comparison>
-<Exp_Comparison op="&lt;:" initialTag="participants : POW( USER)">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:1" typref="178381824" value="participants"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:2" typref="178381824" value="USER"/>
+<Exp_Comparison op="/:" initialTag="not(inconnu : participants)">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:1" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Exp_Comparison op=":" initialTag="((organisateur) : (((participants) \/ ({inconnu}))))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:1" typref="664455449" value="organisateur"/>
+<Binary_Exp op="\/" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:1" typref="178381824" value="participants"/>
+<Nary_Exp op="{" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:2:1" typref="664455449" value="inconnu"/>
+</Nary_Exp>
+</Binary_Exp>
 </Exp_Comparison>
 <Exp_Comparison op=":" initialTag="((dates_prop) : (POW(DATE)))">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:1" typref="1901520867" value="dates_prop"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:4:1" typref="1901520867" value="dates_prop"/>
 <Unary_Exp op="POW" typref="1815758902">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:1" typref="1901520867" value="DATE"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:4:2:1" typref="1901520867" value="DATE"/>
 </Unary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=":" initialTag="((choix_part) : (((USER) &lt;-&gt; (DATE))))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:1" typref="3624437299" value="choix_part"/>
+<Binary_Exp op="&lt;-&gt;" typref="2016678416">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:2:1" typref="178381824" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:2:2" typref="1901520867" value="DATE"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:" initialTag="dom(choix_part) : POW( participants)">
+<Unary_Exp op="dom" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:6:1:1" typref="3624437299" value="choix_part"/>
+</Unary_Exp>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:6:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:" initialTag="ran(choix_part) : POW( dates_prop)">
+<Unary_Exp op="ran" typref="1901520867">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:7:1:1" typref="3624437299" value="choix_part"/>
+</Unary_Exp>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:7:2" typref="1901520867" value="dates_prop"/>
 </Exp_Comparison>
 </Nary_Pred>
 </Nary_Pred>
@@ -149,17 +213,21 @@
 <Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:3:1" typref="178381824" value="parts"/>
 <EmptySet tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:3:2" typref="178381824"/>
 </Exp_Comparison>
+<Exp_Comparison op="/:">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:1" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:2" typref="178381824" value="parts"/>
+</Exp_Comparison>
 <Exp_Comparison op=":">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:1" typref="664455449" value="orga"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:2" typref="178381824" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:1" typref="664455449" value="orga"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:2" typref="178381824" value="USER"/>
 </Exp_Comparison>
 <Exp_Comparison op="/=">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:1" typref="664455449" value="orga"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:2" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:6:1" typref="664455449" value="orga"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:6:2" typref="664455449" value="inconnu"/>
 </Exp_Comparison>
 <Exp_Comparison op="=">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:6:1" typref="664455449" value="organisateur"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:6:2" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:7:1" typref="664455449" value="organisateur"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:7:2" typref="664455449" value="inconnu"/>
 </Exp_Comparison>
 </Nary_Pred>
 </Hypothesis>
@@ -196,19 +264,156 @@
 <Tag goalTag="Invariant is preserved">
 <Nary_Pred op="&amp;">
 <Nary_Pred op="&amp;">
-<Exp_Comparison op=":" initialTag="((organisateur) : (USER))">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:1" typref="664455449" value="organisateur"/>
+<Exp_Comparison op="&lt;:" initialTag="participants : POW( USER)">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:1" typref="178381824" value="participants"/>
 <Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:2" typref="178381824" value="USER"/>
 </Exp_Comparison>
-<Exp_Comparison op="&lt;:" initialTag="participants : POW( USER)">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:1" typref="178381824" value="participants"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:2" typref="178381824" value="USER"/>
+<Exp_Comparison op="/:" initialTag="not(inconnu : participants)">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:1" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Exp_Comparison op=":" initialTag="((organisateur) : (((participants) \/ ({inconnu}))))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:1" typref="664455449" value="organisateur"/>
+<Binary_Exp op="\/" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:1" typref="178381824" value="participants"/>
+<Nary_Exp op="{" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:2:1" typref="664455449" value="inconnu"/>
+</Nary_Exp>
+</Binary_Exp>
 </Exp_Comparison>
 <Exp_Comparison op=":" initialTag="((dates_prop) : (POW(DATE)))">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:1" typref="1901520867" value="dates_prop"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:4:1" typref="1901520867" value="dates_prop"/>
 <Unary_Exp op="POW" typref="1815758902">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:1" typref="1901520867" value="DATE"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:4:2:1" typref="1901520867" value="DATE"/>
 </Unary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=":" initialTag="((choix_part) : (((USER) &lt;-&gt; (DATE))))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:1" typref="3624437299" value="choix_part"/>
+<Binary_Exp op="&lt;-&gt;" typref="2016678416">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:2:1" typref="178381824" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:2:2" typref="1901520867" value="DATE"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:" initialTag="dom(choix_part) : POW( participants)">
+<Unary_Exp op="dom" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:6:1:1" typref="3624437299" value="choix_part"/>
+</Unary_Exp>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:6:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:" initialTag="ran(choix_part) : POW( dates_prop)">
+<Unary_Exp op="ran" typref="1901520867">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:7:1:1" typref="3624437299" value="choix_part"/>
+</Unary_Exp>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:7:2" typref="1901520867" value="dates_prop"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Nary_Pred>
+</Tag>
+</Binary_Pred>
+</Sub_Calculus>
+</Goal>
+</Proof_Obligation>
+<Proof_Obligation>
+<Comment>Operations dans une machine abstraite</Comment>
+<Tag>indiquer_dispo</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="cst"/>
+<Definition name="lprp"/>
+<Definition name="inprp"/>
+<Definition name="inext"/>
+<Definition name="seext"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:1:1" typref="664455449" value="part"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:1:2" typref="178381824" value="USER"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:2:1" typref="4255322998" value="date"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:2:2" typref="1901520867" value="DATE"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:3:1" typref="664455449" value="part"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:3:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:4:1" typref="4255322998" value="date"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:4:2" typref="1901520867" value="dates_prop"/>
+</Exp_Comparison>
+<Exp_Comparison op="/=">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:5:1" typref="664455449" value="organisateur"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:5:2" typref="664455449" value="inconnu"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Hypothesis>
+<Goal>
+<Sub_Calculus>
+<Simple_Assignement_Sub>
+<Variables>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:3:1:1:1" typref="3624437299" value="choix_part"/>
+</Variables>
+<Values>
+<Binary_Exp op="\/" typref="3624437299">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:3:1:2:1:1" typref="3624437299" value="choix_part"/>
+<Nary_Exp op="{" typref="3624437299">
+<Binary_Exp op="|-&gt;" typref="1930871504">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:3:1:2:1:2:1:1" typref="664455449" value="part"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:3:1:2:1:2:1:2" typref="4255322998" value="date"/>
+</Binary_Exp>
+</Nary_Exp>
+</Binary_Exp>
+</Values>
+</Simple_Assignement_Sub>
+<Binary_Pred op="=&gt;">
+<Nary_Pred op="&amp;"/>
+<Tag goalTag="Invariant is preserved">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Exp_Comparison op="&lt;:" initialTag="participants : POW( USER)">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:1" typref="178381824" value="participants"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:2" typref="178381824" value="USER"/>
+</Exp_Comparison>
+<Exp_Comparison op="/:" initialTag="not(inconnu : participants)">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:1" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Exp_Comparison op=":" initialTag="((organisateur) : (((participants) \/ ({inconnu}))))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:1" typref="664455449" value="organisateur"/>
+<Binary_Exp op="\/" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:1" typref="178381824" value="participants"/>
+<Nary_Exp op="{" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:2:1" typref="664455449" value="inconnu"/>
+</Nary_Exp>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=":" initialTag="((dates_prop) : (POW(DATE)))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:4:1" typref="1901520867" value="dates_prop"/>
+<Unary_Exp op="POW" typref="1815758902">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:4:2:1" typref="1901520867" value="DATE"/>
+</Unary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op=":" initialTag="((choix_part) : (((USER) &lt;-&gt; (DATE))))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:1" typref="3624437299" value="choix_part"/>
+<Binary_Exp op="&lt;-&gt;" typref="2016678416">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:2:1" typref="178381824" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:2:2" typref="1901520867" value="DATE"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:" initialTag="dom(choix_part) : POW( participants)">
+<Unary_Exp op="dom" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:6:1:1" typref="3624437299" value="choix_part"/>
+</Unary_Exp>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:6:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Exp_Comparison op="&lt;:" initialTag="ran(choix_part) : POW( dates_prop)">
+<Unary_Exp op="ran" typref="1901520867">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:7:1:1" typref="3624437299" value="choix_part"/>
+</Unary_Exp>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:7:2" typref="1901520867" value="dates_prop"/>
 </Exp_Comparison>
 </Nary_Pred>
 </Nary_Pred>
@@ -267,8 +472,8 @@
 <Nary_Pred op="&amp;"/>
 </Binary_Pred>
 <Binary_Pred op="=&gt;">
-<Exp_Comparison op=":" initialTag="((organisateur) : (USER))">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:1" typref="664455449" value="organisateur"/>
+<Exp_Comparison op="&lt;:" initialTag="participants : POW( USER)">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:1" typref="178381824" value="participants"/>
 <Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:1:2" typref="178381824" value="USER"/>
 </Exp_Comparison>
 <Nary_Pred op="&amp;">
@@ -277,14 +482,80 @@
 <Nary_Pred op="&amp;"/>
 </Binary_Pred>
 <Binary_Pred op="=&gt;">
-<Exp_Comparison op="&lt;:" initialTag="participants : POW( USER)">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:1" typref="178381824" value="participants"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:2" typref="178381824" value="USER"/>
+<Exp_Comparison op="/:" initialTag="not(inconnu : participants)">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:1" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:2:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+</Binary_Pred>
+<Binary_Pred op="=&gt;">
+<Exp_Comparison op=":" initialTag="((organisateur) : (((participants) \/ ({inconnu}))))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:1" typref="664455449" value="organisateur"/>
+<Binary_Exp op="\/" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:1" typref="178381824" value="participants"/>
+<Nary_Exp op="{" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:3:2:2:1" typref="664455449" value="inconnu"/>
+</Nary_Exp>
+</Binary_Exp>
 </Exp_Comparison>
 <Nary_Pred op="&amp;">
 <Binary_Pred op="&amp;">
 <Nary_Pred op="&amp;"/>
 <Nary_Pred op="&amp;"/>
+</Binary_Pred>
+<Binary_Pred op="=&gt;">
+<Exp_Comparison op=":" initialTag="((dates_prop) : (POW(DATE)))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:4:1" typref="1901520867" value="dates_prop"/>
+<Unary_Exp op="POW" typref="1815758902">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:4:2:1" typref="1901520867" value="DATE"/>
+</Unary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+</Binary_Pred>
+<Binary_Pred op="=&gt;">
+<Exp_Comparison op=":" initialTag="((choix_part) : (((USER) &lt;-&gt; (DATE))))">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:1" typref="3624437299" value="choix_part"/>
+<Binary_Exp op="&lt;-&gt;" typref="2016678416">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:2:1" typref="178381824" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:5:2:2" typref="1901520867" value="DATE"/>
+</Binary_Exp>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+<Binary_Pred op="=&gt;">
+<Exp_Comparison op="&lt;:" initialTag="dom(choix_part) : POW( participants)">
+<Unary_Exp op="dom" typref="178381824">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:6:1:1" typref="3624437299" value="choix_part"/>
+</Unary_Exp>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:5:1:6:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
 </Binary_Pred>
 </Nary_Pred>
 </Binary_Pred>
@@ -324,6 +595,8 @@
 <Tag goalTag="Well definedness">
 <Nary_Pred op="&amp;">
 <Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
 <Nary_Pred op="&amp;"/>
 <Nary_Pred op="&amp;"/>
 <Nary_Pred op="&amp;"/>
@@ -389,9 +662,19 @@
 <Nary_Pred op="&amp;"/>
 </Binary_Pred>
 <Binary_Pred op="=&gt;">
+<Exp_Comparison op="/:">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:1" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:2" typref="178381824" value="parts"/>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+<Binary_Pred op="=&gt;">
 <Exp_Comparison op=":">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:1" typref="664455449" value="orga"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:2" typref="178381824" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:1" typref="664455449" value="orga"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:2" typref="178381824" value="USER"/>
 </Exp_Comparison>
 <Nary_Pred op="&amp;">
 <Binary_Pred op="&amp;">
@@ -400,13 +683,15 @@
 </Binary_Pred>
 <Binary_Pred op="=&gt;">
 <Exp_Comparison op="/=">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:1" typref="664455449" value="orga"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:2" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:6:1" typref="664455449" value="orga"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:6:2" typref="664455449" value="inconnu"/>
 </Exp_Comparison>
 <Nary_Pred op="&amp;">
 <Binary_Pred op="&amp;">
 <Nary_Pred op="&amp;"/>
 <Nary_Pred op="&amp;"/>
+</Binary_Pred>
+</Nary_Pred>
 </Binary_Pred>
 </Nary_Pred>
 </Binary_Pred>
@@ -452,17 +737,21 @@
 <Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:3:1" typref="178381824" value="parts"/>
 <EmptySet tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:3:2" typref="178381824"/>
 </Exp_Comparison>
+<Exp_Comparison op="/:">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:1" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:2" typref="178381824" value="parts"/>
+</Exp_Comparison>
 <Exp_Comparison op=":">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:1" typref="664455449" value="orga"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:4:2" typref="178381824" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:1" typref="664455449" value="orga"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:2" typref="178381824" value="USER"/>
 </Exp_Comparison>
 <Exp_Comparison op="/=">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:1" typref="664455449" value="orga"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:5:2" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:6:1" typref="664455449" value="orga"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:6:2" typref="664455449" value="inconnu"/>
 </Exp_Comparison>
 <Exp_Comparison op="=">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:6:1" typref="664455449" value="organisateur"/>
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:6:2" typref="664455449" value="inconnu"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:7:1" typref="664455449" value="organisateur"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:1:2:1:7:2" typref="664455449" value="inconnu"/>
 </Exp_Comparison>
 </Nary_Pred>
 </Hypothesis>
@@ -481,6 +770,132 @@
 </Tag>
 </Goal>
 </Proof_Obligation>
+<Proof_Obligation>
+<Comment>Operations dans une machine abstraite</Comment>
+<Tag>WellDefinedness_Precondition_indiquer_dispo</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="cst"/>
+<Definition name="lprp"/>
+<Definition name="inprp"/>
+<Definition name="inext"/>
+<Definition name="seext"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Goal>
+<Tag goalTag="Well definedness">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+<Binary_Pred op="=&gt;">
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:1:1" typref="664455449" value="part"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:1:2" typref="178381824" value="USER"/>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+<Binary_Pred op="=&gt;">
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:2:1" typref="4255322998" value="date"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:2:2" typref="1901520867" value="DATE"/>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+<Binary_Pred op="=&gt;">
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:3:1" typref="664455449" value="part"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:3:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+<Binary_Pred op="=&gt;">
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:4:1" typref="4255322998" value="date"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:4:2" typref="1901520867" value="dates_prop"/>
+</Exp_Comparison>
+<Nary_Pred op="&amp;">
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Nary_Pred>
+</Tag>
+</Goal>
+</Proof_Obligation>
+<Proof_Obligation>
+<Comment>Operations dans une machine abstraite</Comment>
+<Tag>WellDefinedness_indiquer_dispo</Tag>
+<Tag>INVARIANT</Tag>
+<Definition name="B definitions"/>
+<Definition name="ctx"/>
+<Definition name="cst"/>
+<Definition name="lprp"/>
+<Definition name="inprp"/>
+<Definition name="inext"/>
+<Definition name="seext"/>
+<Definition name="inv"/>
+<Definition name="ass"/>
+<Hypothesis>
+<Nary_Pred op="&amp;">
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:1:1" typref="664455449" value="part"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:1:2" typref="178381824" value="USER"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:2:1" typref="4255322998" value="date"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:2:2" typref="1901520867" value="DATE"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:3:1" typref="664455449" value="part"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:3:2" typref="178381824" value="participants"/>
+</Exp_Comparison>
+<Exp_Comparison op=":">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:4:1" typref="4255322998" value="date"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:4:2" typref="1901520867" value="dates_prop"/>
+</Exp_Comparison>
+<Exp_Comparison op="/=">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:5:1" typref="664455449" value="organisateur"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:7:2:2:1:5:2" typref="664455449" value="inconnu"/>
+</Exp_Comparison>
+</Nary_Pred>
+</Hypothesis>
+<Goal>
+<Tag goalTag="Well definedness">
+<Nary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Binary_Pred op="&amp;">
+<Nary_Pred op="&amp;"/>
+<Nary_Pred op="&amp;"/>
+</Binary_Pred>
+</Binary_Pred>
+</Nary_Pred>
+</Tag>
+</Goal>
+</Proof_Obligation>
 <TypeInfos>
 <Type id="1901520867">
 <Unary_Exp op="POW">
@@ -495,17 +910,44 @@
 <Type id="664455449">
 <Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:3:1" value="USER"/>
 </Type>
+<Type id="3624437299">
+<Unary_Exp op="POW">
+<Binary_Exp op="*">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:4:1:1:1" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:4:1:1:2" value="DATE"/>
+</Binary_Exp>
+</Unary_Exp>
+</Type>
 <Type id="1815758902">
 <Unary_Exp op="POW">
 <Unary_Exp op="POW">
-<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:4:1:1:1" value="DATE"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:5:1:1:1" value="DATE"/>
+</Unary_Exp>
+</Unary_Exp>
+</Type>
+<Type id="2016678416">
+<Unary_Exp op="POW">
+<Unary_Exp op="POW">
+<Binary_Exp op="*">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:6:1:1:1:1" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:6:1:1:1:2" value="DATE"/>
+</Binary_Exp>
 </Unary_Exp>
 </Unary_Exp>
 </Type>
 <Type id="3817003670">
 <Unary_Exp op="POW">
-<Generic_Type tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:5:1:1"/>
+<Generic_Type tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:7:1:1"/>
 </Unary_Exp>
+</Type>
+<Type id="4255322998">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:8:1" value="DATE"/>
+</Type>
+<Type id="1930871504">
+<Binary_Exp op="*">
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:9:1:1" value="USER"/>
+<Id tag="/home/sems1702/Workspace/AB/Doudeule/bdp/Doudeule.bxml:1:8:9:1:2" value="DATE"/>
+</Binary_Exp>
 </Type>
 </TypeInfos>
 </Proof_Obligations>

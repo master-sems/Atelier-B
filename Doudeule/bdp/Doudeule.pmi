@@ -1,19 +1,54 @@
 ﻿THEORY BalanceX IS
-  Doudeule,2,0,0,2,0,0,0;
-  Initialisation,2,0,0,2,0,0,0
+  Doudeule,13,0,0,10,0,0,0;
+  Initialisation,7,0,0,7,0,0,0;
+  creer_reunion,3,0,0,0,0,0,0;
+  indiquer_dispo,3,0,0,3,0,0,0
 END
 &
 THEORY ProofState IS
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Unproved;
+  Unproved;
+  Unproved;
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
+  Proved(0);
   Proved(0);
   Proved(0)
 END
 &
 THEORY MethodList IS
   pr;
+  pr;
+  pr;
+  ?;
+  ?;
+  ?;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
+  pr;
   pr
 END
 &
 THEORY PassList IS
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),(?;0);
+  Force(0),(?;0);
+  Force(0),(?;0);
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
+  Force(0),?;
   Force(0),?;
   Force(0),?
 END
