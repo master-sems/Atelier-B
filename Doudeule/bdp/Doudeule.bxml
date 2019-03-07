@@ -1,0 +1,165 @@
+<Machine name='Doudeule' type='abstraction'>
+<Sets>
+<Set>
+<Id value='DATE' typref='1901520867'/>
+</Set>
+<Set>
+<Id value='USER' typref='178381824'/>
+</Set>
+</Sets>
+<Concrete_Constants>
+<Id value='inconnu' typref='664455449'/>
+</Concrete_Constants>
+<Abstract_Variables>
+<Id value='organisateur' typref='664455449'/>
+<Id value='participants' typref='178381824'/>
+<Id value='dates_prop' typref='1901520867'/>
+</Abstract_Variables>
+<Properties>
+<Exp_Comparison op=':'>
+<Id value='inconnu' typref='664455449'/>
+<Id value='USER' typref='178381824'/>
+</Exp_Comparison>
+</Properties>
+<Invariant>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op=':'>
+<Id value='organisateur' typref='664455449'/>
+<Id value='USER' typref='178381824'/>
+</Exp_Comparison>
+<Exp_Comparison op='&lt;:'>
+<Id value='participants' typref='178381824'/>
+<Id value='USER' typref='178381824'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='dates_prop' typref='1901520867'/>
+<Unary_Exp op='POW' typref='1815758902'>
+<Id value='DATE' typref='1901520867'/>
+</Unary_Exp>
+</Exp_Comparison>
+</Nary_Pred>
+</Invariant>
+<Initialisation>
+<Nary_Sub op='||'>
+<Assignement_Sub>
+<Variables>
+<Id value='organisateur' typref='664455449'/>
+</Variables>
+<Values>
+<Id value='inconnu' typref='664455449'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='participants' typref='178381824'/>
+</Variables>
+<Values>
+<EmptySet typref='3817003670'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='dates_prop' typref='1901520867'/>
+</Variables>
+<Values>
+<EmptySet typref='3817003670'/>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Initialisation>
+<Operations>
+<Operation name='creer_reunion'>
+<Input_Parameters>
+<Id value='ed' typref='1901520867'/>
+<Id value='parts' typref='178381824'/>
+<Id value='orga' typref='664455449'/>
+</Input_Parameters>
+<Precondition>
+<Nary_Pred op='&amp;'>
+<Exp_Comparison op=':'>
+<Id value='ed' typref='1901520867'/>
+<Unary_Exp op='POW' typref='1815758902'>
+<Id value='DATE' typref='1901520867'/>
+</Unary_Exp>
+</Exp_Comparison>
+<Exp_Comparison op='&lt;:'>
+<Id value='parts' typref='178381824'/>
+<Id value='USER' typref='178381824'/>
+</Exp_Comparison>
+<Exp_Comparison op='/='>
+<Id value='parts' typref='178381824'/>
+<EmptySet typref='178381824'/>
+</Exp_Comparison>
+<Exp_Comparison op=':'>
+<Id value='orga' typref='664455449'/>
+<Id value='USER' typref='178381824'/>
+</Exp_Comparison>
+<Exp_Comparison op='/='>
+<Id value='orga' typref='664455449'/>
+<Id value='inconnu' typref='664455449'/>
+</Exp_Comparison>
+<Exp_Comparison op='='>
+<Id value='organisateur' typref='664455449'/>
+<Id value='inconnu' typref='664455449'/>
+</Exp_Comparison>
+</Nary_Pred>
+</Precondition>
+<Body>
+<Nary_Sub op='||'>
+<Assignement_Sub>
+<Variables>
+<Id value='organisateur' typref='664455449'/>
+</Variables>
+<Values>
+<Id value='orga' typref='664455449'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='participants' typref='178381824'/>
+</Variables>
+<Values>
+<Id value='parts' typref='178381824'/>
+</Values>
+</Assignement_Sub>
+<Assignement_Sub>
+<Variables>
+<Id value='dates_prop' typref='1901520867'/>
+</Variables>
+<Values>
+<Id value='ed' typref='1901520867'/>
+</Values>
+</Assignement_Sub>
+</Nary_Sub>
+</Body>
+</Operation>
+</Operations>
+<TypeInfos>
+<Type id='1901520867'>
+<Unary_Exp op='POW'>
+<Id value='DATE'/>
+</Unary_Exp>
+</Type>
+<Type id='178381824'>
+<Unary_Exp op='POW'>
+<Id value='USER'/>
+</Unary_Exp>
+</Type>
+<Type id='664455449'>
+<Id value='USER'/>
+</Type>
+<Type id='1815758902'>
+<Unary_Exp op='POW'>
+<Unary_Exp op='POW'>
+<Id value='DATE'/>
+</Unary_Exp>
+</Unary_Exp>
+</Type>
+<Type id='3817003670'>
+<Unary_Exp op='POW'>
+<Generic_Type/>
+</Unary_Exp>
+</Type>
+</TypeInfos>
+
+</Machine>

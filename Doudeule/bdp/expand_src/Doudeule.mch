@@ -1,4 +1,4 @@
-/* Doudeule
+﻿/* Doudeule
  * Author: 
  * Creation date: 3/7/19
  */
@@ -7,53 +7,40 @@ MACHINE Doudeule
 SETS
     DATE ;
     USER
-    
-CONSTANTS
+
+CONCRETE_CONSTANTS
     inconnu
 
 PROPERTIES
-    inconnu: USER
+    inconnu : USER
 
 ABSTRACT_VARIABLES
-    organisateur, 
-    participants,
-    dates_prop,
-    choix_part
-    
+    organisateur ,
+    participants ,
+    dates_prop
+
 INVARIANT
     organisateur : USER &
     participants <: USER &
-    dates_prop : POW(DATE) &
-    choix_part : USER <-> DATE
-    
+    dates_prop : POW ( DATE )
+
 INITIALISATION
     organisateur := inconnu ||
     participants := {} ||
     dates_prop := {}
-    
+
 OPERATIONS
-    
-    creer_reunion(ed, parts, orga) = 
-    PRE 
-        ed: POW(DATE) & 
+
+    creer_reunion ( ed , parts , orga ) =
+    PRE
+        ed : POW ( DATE ) &
         parts <: USER & parts /= {} &
         orga : USER & orga /= inconnu &
         organisateur = inconnu
-    THEN 
+    THEN
         organisateur := orga ||
         participants := parts ||
         dates_prop := ed
     END
-    
-    indiquer_dispo(part, date) =
-    PRE
-        part : USER & 
-        date : DATE &
-        part : participants &
-        date : dates_prop &
-        organisateur /= inconnu
-    THEN
-        
-    END    
 
 END

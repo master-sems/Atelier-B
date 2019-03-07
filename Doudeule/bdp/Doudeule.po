@@ -1,0 +1,27 @@
+THEORY ProofList IS
+_f(1) & _f(2) & Initialisation.2,(_f(3) & _f(6) => _f(7));
+_f(1) & _f(2) & Initialisation.1,(_f(3) & _f(4) => _f(5))
+END
+&
+THEORY Formulas IS
+((NAT) = (((0) .. (2147483647)))) & ((INT) = (((-2147483647) .. (2147483647))));
+DATE: FIN(INTEGER) & not(DATE = {}) & USER: FIN(INTEGER) & not(USER = {}) & ((inconnu) : (USER));
+"Invariant is preserved";
+"Check invariant participants : POW( USER)";
+{} : POW( USER);
+"Check invariant ((dates_prop) : (POW(DATE)))";
+(({}) : (POW(DATE)));
+((organisateur) : (USER)) & participants : POW( USER) & ((dates_prop) : (POW(DATE)));
+((ed) : (POW(DATE))) & parts : POW( USER) & not(parts = {}) & ((orga) : (USER)) & not(orga = inconnu) & ((organisateur) = (inconnu));
+DATE: FIN(INTEGER) & not(DATE = {});
+participants : POW( USER);
+((organisateur) : (USER));
+not(orga = inconnu);
+((orga) : (USER));
+not(parts = {});
+parts : POW( USER);
+((ed) : (POW(DATE)))
+END
+&
+THEORY EnumerateX
+END
